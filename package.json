@@ -1,0 +1,15 @@
+{
+  "name": "poop-bot",
+  "version": "1.0.0",
+  "description": "Bot Discord qui réagit 💩 aux messages contenant des mots grossiers",
+  "main": "poopBot.js",
+  "scripts": {
+    "start": "node poopBot.js"
+  },
+  "author": "Toi",
+  "license": "MIT",
+  "dependencies": {
+    "discord.js": "^14.13.0",
+    "dotenv": "^16.4.5"
+  }
+}
