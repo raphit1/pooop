@@ -1,15 +1,43 @@
-// poopBot.js const { Client, GatewayIntentBits, Partials } = require("discord.js"); require("dotenv").config();
+const { Client, GatewayIntentBits } = require("discord.js");
+require("dotenv").config();
 
-const client = new Client({ intents: [ GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent ], partials: [Partials.Message, Partials.Channel] });
+const client = new Client({
+  intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent],
+});
 
-const motsCaca = [ "caca", "merde", "chier", "chiotte", "chiottes", "déféquer", "crotte", "excrément", "prout", "toilettes", "pipi", "popo", "diarrhée", "fiente", "détritus" ];
+const motsTabous = [
+  "caca",
+  "merde",
+  "chier",
+  "chiotte",
+  "déféquer",
+  "pipi",
+  "diarrhée",
+  "fiente",
+  "déterger",
+  "selles",
+  "selle",
+  "étron",
+  "crottes",
+  "crottin",
+];
 
-client.once("ready", () => { console.log(💩 PoopBot activé en tant que ${client.user.tag}); });
+client.once("ready", () => {
+  console.log(`💩 PoopBot activé en tant que ${client.user.tag}`);
+});
 
-client.on("messageCreate", async (message) => { if (message.author.bot) return;
+client.on("messageCreate", async (message) => {
+  if (message.author.bot) return;
 
-const contenu = message.content.toLowerCase(); const contientCaca = motsCaca.some(mot => contenu.includes(mot));
+  const contenu = message.content.toLowerCase();
 
-if (contientCaca) { try { await message.react("💩"); // emoji caca } catch (err) { console.error("Erreur de réaction:", err); } } });
+  if (motsTabous.some((mot) => contenu.includes(mot))) {
+    try {
+      await message.react("💩");
+    } catch (err) {
+      console.error("Erreur de réaction 💩 :", err);
+    }
+  }
+});
 
-client.login(process.env.POOP_TOKEN);
+client.login(process.env.TOKEN);
